@@ -1,0 +1,74 @@
+EDA Observations:
+- Alley: 'NA' means 'No alley access'. This likely was interpreted as np.nan
+- MSSubClass - categories overlap, may have correlations within "sub"-subclasses
+- Condition1/Condition2 - same fields, and np.nans may have to be preserved
+- BldgType - may eliminate overlap of subclass
+- HouseStyle - along with BldgType these may be NaN for commercial/industrial
+- YearRemodAdd - may be same as construction date.  This means no remodels or addns
+-Exterior2nd - double field, likely has NaNs
+-MasonryVeneerType - check 'None' value for auto-inference
+-BasementQual - NA means "no basement" - likely interpreted as np.nan
+-BasementCond - same as above
+-Basement Exposure - check 'No' and 'NA' for np.nan overwrite
+-BasementFintype1 - 'NA'
+-BasementFinType2 - 'NA', also optional field with lots of actual NAs - need to parse carefully
+-CentralAir - easy dummy convert Y/N to 1/0
+-2ndFlSqFt - optional field, many nans
+-FireplaceQu - NA means 'no fireplace'. Nan status likely valid
+-GarageType - NA means 'no garage'
+-MANY OPTIONAL CATEGORY COLUMNS
+-PoolQC - NA is no pool
+-Fence - NA is no fence
+-MiscFeature - NA is none
+$VALUE OF MISC FEATURE - FREEBIE!
+
+df_na_categories = df[['Lot Frontage','Alley','Mas Vnr Type','Mas Vnr Area','Fireplace Qu','Pool QC','Fence','Misc Feature']]
+
+df_na_basement = df[['Bsmt Qual','Bsmt Cond','Bsmt Exposure','BsmtFin SF 1','BsmtFin Type 2','BsmtFin SF 2','Bsmt Unf SF','Total Bsmt SF','Bsmt Full Bath','Bsmt Half Bath']]
+
+df_na_garage = [['Garage Type','Garage Yr Blt','Garage Finish','Garage Cars','Garage Area','Garage Qual','Garage Cond']]
+
+-Subclass, Id, PID type to string (categorical, not numeric)
+-Year Built to datetime
+
+
+Variables
+DONE: - Lot Frontage
+	Linear feet of street connected to property
+	Bad rows removed (had FR listed), then NaNs replaced with 0s
+
+DONE: - Confirmed validity of Fireplace Quality Nans - no Fireplaces > 0 have NaN
+
+DONE: - Mas Vnr Type (Masonry Veneer Type) / Mas Vnr Area (Masonry Veneer Area)
+	Replaced with 'None' string
+- Add parameters for read_csv on reimport
+
+DONE- Basement Exposure Type - No needs to be consistent with NA.  
+		Index 1327 is NaN, and has Nan Vals for multiple Basement cols. Need to reconcile
+		WILL KEEP AND FILLNA
+
+DONE: - Basement exposure data Nan: likely should be "No" exposure, but may want to remove
+	Indexes 1456, 1547, 1997 REMOVED
+
+DONE - Basement - NA is no basement.  NA should be changed to 0sqft
+
+CONFIRMED Unneeded/DONE: - Basements: Number Basement bathrooms is listed as '0' - should be 0 for units With basements and NA for units without basements.
+
+DONE: - BsmtFin Type 2 - data missing, because SQft 2 has data.
+	Index 1147 REMOVED
+
+DONE:- Remaining Values: NaNs should become 'NA'
+
+DONE: - Garage type detached, Yr built is NA: Index 1712.  NAs across garage vals, despite Detached type
+	Remove
+
+DONE: Column Names - lowercase, remove spaces (repl w _)
+
+DONE-Data Types
+	Years to Datetime - YES
+	PID to string - No.  May be numerical connection
+
+JUDGEMENT CALLS
+	- Removing Basement Exposure Nans where basements exist (not changing them to 'No', since 'No' values imported correctly.)
+	- Garage Year Built - leaving as Nan for now, since no default datetime fits
+		- Index 1699 - changing from 2207 to 2007, rather than removing

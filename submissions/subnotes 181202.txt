@@ -1,0 +1,125 @@
+subnotes 181202
+
+Corr with 'saleprice'
+
+- 'overall_qual': 		0.81
+- 'gr_liv_area': 		0.71
+- 'garage_cars': 		0.66
+- 'garage_area': 		0.65
+- 'total_bsmt_sf': 		0.65
+- 'first_fl_sf': 		0.63
+- 'age_at_sale':   	   -0.59
+
+Dummies by 'saleprice'
+
+- 'nhood_med_abv_258300':	0.58
+- 'age_of_remod':		   -0.56
+- 'foundation_PConc':		0.54
+- 'fireplace_qu_NA':	   -0.49
+- 'heating_qc_Ex':			0.46
+- 'garage_age_under_2':		0.42
+- 'is_post_war':			0.39
+- 'garage_type_Attchd':		0.38
+
+Polynomial
+
+> 'overall_qual gr_liv_area':	0.868
+- 'overall_qual first_flr_sf':	0.833
+- 'overall_qual^2':				0.832
+- 'overall_qual garage_cars':	0.826
+- 'overall_qual garage_area':	0.825
+- 'overall_qual total_bsmt_sf':	0.821
+> 'garage_cars total_bsmt_sf': 	0.786
+
+
+High Corr Vars
+
+One only:
+- 'garage_area','garage_cars': 			0.9
+- 'gr_liv_area','totrms_abvgrd':		0.8
+- 'first_fl_sf','total_bsmt_sf':		0.78
+-----------------
+- 'bedroom_abvgr','totrms_abvgrd':		0.67
+- 'bmst_full_bath','bsmtfin_sf_1': 		0.66
+- 'foundation_PConc','age_at_sale':    -0.66
+- 'year_remod/add','year_built':		0.63
+- 'half_bath','second_fl_sf': 			0.62
+- 'full_bath','gr_liv_area': 			0.62
+- 'overall_qual','year_built':			0.6
+- 'year_remod/add','age_at_sale':  	   -0.62
+- 'garage_cars','overall_qual':			0.58
+- 'garage_area','overall_qual':			0.55
+
+Collinear Vars
+
+- 'year_built','age_at_sale': 1
+
+Model 181203:
+['overall_qual gr_liv_area','first_flr_sf garage_cars','age_at_sale',nhood_med_abv258300 foundation_Pconc']
+
+Model 181203a:
+features = ['overall_qual gr_liv_area','garage_area first_flr_sf','age_at_sale','age_of_remod',
+            'nhood_med_abv_258300 foundation_PConc','heating_qc_Ex','garage_age_under_2 garage_type_Attchd',
+            'is_post_war','garage_type_Detchd','heating_qc_TA','fireplaces','mas_vnr_area',
+            'bsmtfin_sf_1','fireplace_qu_Gd','open_porch_sf']
+
+lr.score = .899
+cvs = .888
+lasso .85
+ridge .85
+
+Model 181204:
+['overall_qual gr_liv_area','garage_area','first_flr_sf','age_at_sale','age_of_remod',
+#             'nhood_med_abv_258300 foundation_PConc','heating_qc_Ex','garage_age_under_2 garage_type_Attchd',
+#             'is_post_war','heating_qc_TA','fireplaces','mas_vnr_area',
+#             'bsmtfin_sf_1','fireplace_qu_Gd','open_porch_sf','lot_area']
+
+lrscore = .899
+cvs = .894
+lasso cvs = .869
+lasso r2 = .873
+ridge = .8697
+ridge r2 = .873
+
+Model 181204a: - finer garage age 10%, nhood groups 10%, add dummy sale type.
+
+Model 181204b: - wider garage/nhoods 20%, replacing dummies with rating scale where possible
+
+rating dicts:
+	number of stories/mssubclass
+
+lot_shape
+{'Reg':4,'IR1':3,'IR2':2,'IR3':1}
+
+land_contour
+{'Lvl':4,'Bnk':3,'HLS':2,'Low':1}
+
+utilities
+{'AllPub':4,'NoSewr':3,'NoSeWa':2,'ELO':1}
+
+land_slope
+{'Gtl':-1,'Mod':-2,'Sev':-3}
+
+exter_qu, exter_cond, heating_qc, kitchen_qual
+{'Ex':5,'Gd':4,'TA':3,'Fa':2,'Po':1}
+
+bsmt_qual, fireplace_qu, pool_qc,  garage_qual, garage_cond
+{'Ex':5,'Gd':4,'TA':3,'Fa':2,'Po':1,'NA':0}
+
+bsmt_exposure
+{'Gd':4,'Av':3,'Mn':2,'No':1,'NA':0}
+
+bsmtfin_type_1 / 2
+{'GLQ':6,'ALQ':5,'BLQ':4,'Rec':3,'LwQ':2,'Unf':1,'NA':0}
+
+functional
+{'Typ':0,'Min1':-1,'Min2':-2,'Mod':-3,'Maj1':-4,'Maj2':-5,'Sev':-6,'Sal':-7}
+
+garage_finish,
+{'Fin':3,'RFn':2,'Unf':1,'NA':0}
+
+paved_drive
+{'Y':2,'P':1,'N':0}
+
+fence
+{'GdPrv':4,'MnPrv':3,'GdWo':2,'MnWw':1,'NA':0}

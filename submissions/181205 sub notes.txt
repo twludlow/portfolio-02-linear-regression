@@ -1,0 +1,251 @@
+Enhancement ideas:
+
+	add additional cubic metric
+
+	finish ordinization of dummies - do by corr!
+		roofstyle matl 
+		exterior 
+		masonry veneer 
+		foundation 
+
+Corr Rankings
+	Cond
+		PosA:3
+		PosN:2
+		Norm:1
+		RRNn:0
+		RRNe:0
+		RRAe:-1
+		RRAn:-1
+		Artery:-3
+		Feeder:-2
+	BldgType
+		1Fam:2
+		TwnhseE:1
+		Duplex:0
+		Twnhs:-1
+		2fmCon:-1
+	HouseStyle
+		2Story:3
+		2.5Fin:2
+		2.5Unf:1
+		1Story:0
+		SLvl:-1
+		SFoyer:-2
+		1.5Unf:-2
+		1.5Fin:-3
+	RoofStyle
+		Hip:2
+		Shed:1
+		Flat:1
+		Mansard:0
+		Gambrel:-1
+		Gable:-2
+	RoofMatl
+		WdShngl:2
+		WdShake:1
+		Membran:0
+		Tar&Grv:-1
+		CompShg:-2
+	Ext
+		VinylSid:4
+		CemntBd:3
+		Stone:2
+		BrkFace:1
+		ImStucc:1
+		BrkComm:0
+		AsphShn:0
+		CBlock:-1
+		Plywood:-1
+		WdShing:-2
+		Stucco:-3
+		HdBoard:-4
+		AsbShng:-5
+		MetalSd:-5
+		Wd Sdng:-6
+	Mas
+		Stone:2
+		BrkFace:1
+		BrkCmn:0
+		None:-1
+	Elect
+		SBrkr:1
+		Mix:0
+		FuseP:-1
+		FuseF:-2
+		FuseA:-3
+	Fdn
+		PConc:2
+		Wood:0
+		Stone:-1
+		Slab:-2
+		BrkTil:-3
+		CBlock:-4
+	GarType
+		Attchd:6
+		BuiltIn:5
+		2Types:4
+		Basment:3
+		CarPort:2
+		NA:0
+		Detchd:1
+	SaleType
+		New:3
+		Con:2
+		ConLI:2
+		CWD:1
+		Oth:0
+		ConLw:-1
+		ConLD:-2
+		COD:-3
+		WD:-4
+
+
+	refine ordinals to include negatives
+
+	confirm LassoCV coefs to determine results
+
+	narrow percentiles to 18
+
+Prev model dicts:
+cols_for_dict = ['fireplace_qu','exter_qual','exter_cond','heating_qc',
+                 'kitchen_qual','bsmt_qual','pool_qc','garage_qual','garage_cond',
+                 'fence','paved_drive','garage_finish','bsmt_exposure','lot_shape',
+                 'land_contour','utilities','land_slope']
+
+link_d = {
+    'qual':['fireplace_qu','exter_qual','exter_cond','heating_qc','kitchen_qual',
+             'bsmt_qual','pool_qc','garage_qual','garage_cond'],
+    'fence':['fence'],
+    'paved_drive':['paved_drive'],
+    'garage_finish':['garage_finish'],
+    'bsmtfin':['bsmtfin_type_1','bsmtfin_type_2'],
+    'bsmt_exposure':['bsmt_exposure'],
+    'lot_shape':['lot_shape'],
+    'land_contour':['land_contour'],
+    'utilities':['utilities'],
+    'land_slope':['land_slope']
+}
+
+dod = {
+    'qual':{'Ex':5,'Gd':4,'TA':3,'Fa':2,'Po':1,'NA':0},
+    'fence':{'GdPrv':4,'MnPrv':3,'GdWo':2,'MnWw':1,'NA':0},
+    'paved_drive':{'Y':2,'P':1,'N':0},
+    'garage_finish':{'Fin':3,'RFn':2,'Unf':1,'NA':0},
+    'bsmtfin':{'GLQ':6,'ALQ':5,'BLQ':4,'Rec':3,'LwQ':2,'Unf':1,'NA':0},
+    'bsmt_exposure':{'Gd':4,'Av':3,'Mn':2,'No':1,'NA':0},
+    'lot_shape':{'Reg':4,'IR1':3,'IR2':2,'IR3':1},
+    'land_contour':{'Lvl':4,'Bnk':3,'HLS':2,'Low':1},
+    'utilities':{'AllPub':4,'NoSewr':3,'NoSeWa':2,'ELO':1},
+    'land_slope':{'Gtl':-1,'Mod':-2,'Sev':-3}
+}
+
+NONZERO VARS
+['ms_subclass',
+ 'lot_frontage',
+ 'lot_area',
+ 'lot_shape',
+ 'land_contour',
+ 'utilities',
+ 'land_slope',
+ 'condition_1',
+ 'condition_2',
+ 'bldg_type',
+ 'house_style',
+ 'overall_cond',
+ 'year_built',
+ 'roof_style',
+ 'roof_matl',
+ 'exterior_1st',
+ 'exterior_2nd',
+ 'mas_vnr_type',
+ 'mas_vnr_area',
+ 'exter_qual',
+ 'exter_cond',
+ 'foundation',
+ 'bsmt_qual',
+ 'bsmt_exposure',
+ 'bsmtfin_sf_1',
+ 'bsmtfin_sf_2',
+ 'bsmt_unf_sf',
+ 'heating_qc',
+ 'has_central_air',
+ 'second_fl_sf',
+ 'low_qual_fin_sf',
+ 'bsmt_full_bath',
+ 'bsmt_half_bath',
+ 'full_bath',
+ 'half_bath',
+ 'bedroom_abvgr',
+ 'kitchen_abvgr',
+ 'kitchen_qual',
+ 'totrms_abvgrd',
+ 'fireplaces',
+ 'fireplace_qu',
+ 'garage_type',
+ 'garage_cond',
+ 'paved_drive',
+ 'wood_deck_sf',
+ 'open_porch_sf',
+ 'enclosed_porch',
+ 'three_ssn_porch',
+ 'screen_porch',
+ 'pool_area',
+ 'pool_qc',
+ 'fence',
+ 'mo_sold',
+ 'yr_sold',
+ 'sale_type',
+ 'age_at_sale',
+ 'age_of_remod',
+ 'sale_time_to_recession',
+ 'garage_age_under_4',
+ 'garage_age_13_31',
+ 'garage_age_32_44',
+ 'garage_age_over_66',
+ 'ms_zoning_C (all)',
+ 'ms_zoning_FV',
+ 'ms_zoning_RM',
+ 'nhood_med_194280_230759',
+ 'nhood_med_168610_194280',
+ 'nhood_med_115650_136516',
+ 'is_split_multi',
+ 'is_duplex',
+ 'is_pud',
+ 'is_pre_war',
+ 'overall_qual garage_cars',
+ 'overall_qual garage_area',
+ 'overall_qual first_flr_sf',
+ 'overall_qual garage_finish',
+ 'exter_qual garage_cars',
+ 'exter_qual first_flr_sf',
+ 'gr_liv_area year_remod/add',
+ 'kitchen_qual first_flr_sf',
+ 'garage_cars^2',
+ 'garage_cars garage_finish',
+ 'garage_area nhood_med_abv_230759',
+ 'total_bsmt_sf bsmt_qual',
+ 'total_bsmt_sf nhood_med_abv_230759',
+ 'total_bsmt_sf fireplace_qu',
+ 'nhood_med_abv_230759 garage_finish',
+ 'fireplace_qu^2',
+ 'overall_qual_gr_liv_area exter_qual',
+ 'overall_qual_gr_liv_area garage_area',
+ 'overall_qual_gr_liv_area total_bsmt_sf',
+ 'overall_qual_gr_liv_area fireplace_qu',
+ 'overall_qual_gr_liv_area overall_qual kitchen_qual']
+
+Zeros x2
+3 lot_shape
+9 bldg_type
+50 pool_qc
+55 age_at_sale
+72 overall_qual garage_cars
+75 overall_qual garage_finish
+77 exter_qual first_flr_sf
+84 total_bsmt_sf nhood_med_abv_230759
+
+181205a: 
+-Remove 0ed lasso vars
+-check nhood and garage age percentages - USING 11G 18N
+-revert questionable ordinals to dummies

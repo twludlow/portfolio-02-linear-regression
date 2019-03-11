@@ -1,0 +1,67 @@
+Dummy Categories
+- MS Zoning, MS Subclass, Bldg Type, House Style, Neighborhood
+
+nhood bottom 25
+['MeadowV','IDOTRR','BrDale','OldTown','BrkSide','Edwards','SWISU']
+
+nhood top 25
+['ClearCr','Somerst','Timber','Veenker','GrnHill','NoRidge','NridgHt','StoneBr']
+
+SUB#2 181201 - Model criteria 181201:
+['overall_qual', 'gr_liv_area','garage_area', 'total_bsmt_sf','nhood_top_qtl', 'year_built','totrms_abvgrd','has_new_garage' 'bsmtfin_sf_1']
+
+'new_garage_yr' set at 2004, random_state = 69
+
+**WIP**
+
+new_garage=2006
+random_state = 1125
+Model criteria 181201a:
+['overall_qual','gr_liv_area','garage_area',
+            'total_bsmt_sf','nhood_top_qtl','age_at_sale',
+            'full_baths totrms_abvgrd','mas_vnr_area','fireplaces',
+            'has_new_garage','bsmtfin_sf_1','nhood_bottom_qtl']
+
+ridge R^2 = 0.8261404029157323
+
+**Outliers Removed**
+
+new_garage_age <= 8
+random_state=1125
+
+criteria 181201a:
+['']
+
+SUBMISSION2 - Unique:
+'overall_qual',
+'gr_liv_area',
+'garage_cars garage_area',
+'total_bsmt_sf',
+'nhood_top_qtl',
+'age_at_sale',
+'foundation_PConc',
+'full_bath',
+'has_new_garage',
+'fireplace_qu_NA'
+
+ridge r2 = 0.8203377670374661
+
+SUBMISSION3 - Unique: random_state=122
+['overall_qual',
+'gr_liv_area',
+'garage_area',
+'nhood_top_qtl',
+'age_at_sale',
+'total_bsmt_sf foundation_PConc',
+'full_bath',
+'has_new_garage']
+
+***Interactions***
+
+Foundation, misc val, sale type
+
+RULED OUT
+	age at sale * sale time to recession
+	overall qual * overall cond
+	MSZoning dummies * 1st fl sf or lot area
+
